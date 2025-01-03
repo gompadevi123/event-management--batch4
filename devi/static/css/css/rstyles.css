@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;      
+    background-image:url(../images/p16.jpg) ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    background-color:#c8d4db;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(178, 201, 213, 0.897);
+}
+
+/* Change color and transparency of the 'New Registration' heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(90, 4, 93);
+}
+
+/* Change color and transparency of all labels */
+label {
+    font-size: 20px;
+    margin-bottom: 5px;
+    display: block;
+    color: rgb(11, 11, 11);
+}
+
+/* Change color of all input text */
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+/* Change color of placeholder text */
+input::placeholder {
+    color: rgba(51, 65, 66, 0.8);
+}
+
+/* Change the color of the Submit button */
+.btn {
+    width: 48%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Change the color of the Cancel button */
+.btn.cancel {
+    background-color: #bc453d;
+}
+
+.btn.cancel:hover {
+    background-color: hsla(1, 98%, 46%, 0.832);
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+

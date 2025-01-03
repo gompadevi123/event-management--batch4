@@ -1,0 +1,56 @@
+/* Create Event Page Specific Styles */
+
+/* Body styles for Create Event page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ed8947;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Centering the form container */
+h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Styling for the form container */
+.form-container {
+    width: 30%;  /* Reduced width to 40% */
+    margin: 0 auto;  /* Center the form */
+    padding: 20px;  /* Reduced padding for more compact form */
+    background-color: rgb(239, 232, 140);
+    box-shadow: 0 4px 8px rgba(227, 217, 217, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;  /* Space at the top */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
+/* Form layout and styling */
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;  /* Remove any extra margin */
+}
+
+/* Label styles */
+form label {
+    margin-top: -10px;
+    margin-bottom: 2px;  /* Decreased space between label and input */
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input and Textarea styling */
+form input, form textarea {
+    padding: 8px;  /* Reduced padding */
+    margin-top:2px;
+    margin-bottom: 2px;  /* Decreased space between fields */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 12px;  /* Slightly smaller font size for compactness */
+    width: 100%;  /* Ensure input fields take full width */
+    box-sizing: border-box;  /* Include padding in width calculation */
+}
