@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Event Ticket</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Event Ticket</h1>
+        <form id="event-booking-form">
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" placeholder="Enter your name" required><br>
+            
+            <label for="location">Event Location:</label><br>
+            <input type="text" id="location" placeholder="Enter the event location" required><br>
+            
+            <label for="start-time">Event Start Time:</label><br>
+            <input type="datetime-local" id="start-time" required><br>
+            
+            <label for="end-time">Event End Time:</label><br>
+            <input type="datetime-local" id="end-time" required><br>
+            
+            <label for="description">Event Description:</label><br>
+            <textarea id="description" placeholder="Enter event description" required></textarea><br>
+            
+            <label for="type">Event Type:</label><br>
+            <select id="type" required>
+                <option value="">Select event type</option>
+                <option value="conference">Conference</option>
+                <option value="wedding">Wedding</option>
+                <option value="party">Party</option>
+                <option value="seminar">Seminar</option><br>
+            </select>
+            
+            <label for="tickets">Number of Tickets:</label><br>
+            <input type="number" id="tickets" placeholder="Enter the number of tickets" required><br>
+            
+            <label for="capacity">Hall Capacity:</label><br>
+            <select id="capacity" required>
+                <option value="">Select hall capacity</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option><br>
+            </select>
+            
+            <button

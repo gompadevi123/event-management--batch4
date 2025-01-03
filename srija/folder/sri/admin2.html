@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        .send-email {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .send-email:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Event Management</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Event Name</th>
+                <th>Email</th>
+                <th>Event Date</th>
+                <th>Mobile</th>
+                <th>Alt Mobile</th>
+                <th>Affordable Amount</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>Send Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic rows will be appended here -->
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sample event data
+            const events = [
+                { username: 'poojitha', eventName: 'conference', email: 'kanugantipoojitha@gmail.com', eventDate: '25-12-2024', mobile: '1234567890', altMobile: '0987654321', amount: '1000', description: 'hii' },
+                { username: 'Uha', eventName: 'gathering', email: 'pallerlauha2005@gmail.com', eventDate: '31-12-2024', mobile: '1234567891', altMobile: '0987654322', amount: '2000', description: 'Welcome' },
+                { username: 'Prasha', eventName: 'marriage', email: 'kothaprathyusha2024@gmail.com', eventDate: '26-12-2024', mobile: '1234567892', altMobile: '0987654323', amount: '3000', description: 'hiii' }
+            ];
+
+            const tbody = document.querySelector('tbody');
+            events.forEach(event => {
+                const row = document.createElement('tr');
+                for (const key in event) {
+                    const cell = document.createElement('td');
+                    cell.textContent = event[key];
+                    row.appendChild(cell);
+                }
+                const actions = `
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td><button class="send-email" data-email="${event.email}" data-description="${event.description}">Send Email</button></td>`;
+                row.innerHTML += actions;
+                tbody.appendChild(row);
+            });
+
+            // Attach click event to all "Send Email" buttons
+            document.querySelectorAll('.send-email').forEach(button => {
+                button.addEventListener('click', function () {
+                    const email = this.getAttribute('data-email');
+                    const description = this.getAttribute('data-description');
+
+                    fetch('/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, description }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message) {
+                                alert('Email sent successfully!');
+                            } else {
+                                alert(`Failed to send email: ${data.error}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred while sending the email.');
+                        });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
