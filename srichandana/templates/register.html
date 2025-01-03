@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="messages">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="registration-container">
+  <h2>Register for Our Event Management System</h2>
+  <p>Join us to simplify every aspect of your event planning. Create, organize, and manage events like never before.</p>
+
+  <h3>Why Choose Our Platform?</h3>
+  <ul>
+    <li><strong>Customizable Planning Tools:</strong> Collaborate and manage timelines effortlessly.</li>
+    <li><strong>Effortless Registration & Ticketing:</strong> Secure, online attendee registration and tracking.</li>
+    <li><strong>Integrated Marketing Solutions:</strong> Boost event visibility with promotional tools.</li>
+    <li><strong>Audience Engagement:</strong> Keep attendees engaged with interactive features.</li>
+    <li><strong>Comprehensive Analytics:</strong> Make data-driven decisions with actionable insights.</li>
+  </ul>
+
+  <form method="POST" class="registration-form" onsubmit="return validateForm()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" placeholder="Enter your username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Enter your password" required>
+      <small id="password-strength" class="strength-message"></small>
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile Number</label>
+      <input type="text" name="mobile" id="mobile" placeholder="Enter your mobile number" required>
+      <small id="mobile-error" class="strength-message"></small>
+    </div>
+
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" name="dob" id="dob" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Enter your email address" required>
+      <small id="email-error" class="strength-message"></small>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" name="city" id="city" placeholder="Enter your city" required>
+    </div>
+
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" name="state" id="state" placeholder="Enter your state" required>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select name="role" id="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+<style>
+  
+  .registration-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: whitesmoke;
+  }
+  .registration-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #31d6d1;
+    
+  }
+  .registration-form {
+    margin-top: 20px;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .strength-message {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background: #3dc97a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: #71ddd9;
+  }
+  .alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
+<script>
+
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
+// Function to validate password strength
+function validatePasswordStrength(password) {
+    let strength = 0;
+
+    if (password.length >= 8) strength++; 
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++; 
+    if (/[@$!%*?&]/.test(password)) strength++;
+    return strength;
+}
+
+// Attach event listeners to form elements
+window.onload = function () {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const emailError = document.getElementById('email-error');
+    const passwordStrength = document.getElementById('password-strength');
+    const mobileInput = document.getElementById('mobile');
+    mobileInput.addEventListener('input', validateMobileNumber);
+
+    // Email validation
+    emailInput.addEventListener('input', function () {
+        if (!validateEmail(emailInput.value)) {
+            emailError.textContent = 'Invalid email format.';
+            emailError.style.color = 'red';
+        } else {
+            emailError.textContent = '';
+        }
+    });
+   
+
+    // Password strength checking
+    passwordInput.addEventListener('input', function () {
+        const strength = validatePasswordStrength(passwordInput.value);
+        switch (strength) {
+            case 0:
+            case 1:
+                passwordStrength.textContent = 'Weak';
+                passwordStrength.style.color = 'red';
+                break;
+            case 2:
+                passwordStrength.textContent = 'Moderate';
+                passwordStrength.style.color = 'orange';
+                break;
+            case 3:
+            case 4:
+                passwordStrength.textContent = 'Strong';
+                passwordStrength.style.color = 'green';
+                break;
+        }
+    });
+};
+function validateMobileNumber() {
+    const mobileNumber = document.getElementById("mobile").value;
+    const mobilePattern = /^[6-9]\d{9}$/;
+    const errorElement = document.getElementById("mobile-error");
+
+    if (mobilePattern.test(mobileNumber)) {
+        errorElement.textContent = ''; // Clear error message
+        return true;
+    } else {
+        errorElement.textContent = 'Invalid mobile number. Please enter a valid 10-digit number starting with 6, 7, 8, or 9.';
+        errorElement.style.color = 'red';
+        return false;
+    }
+}
+
+
+function validateForm() {
+  // Perform all necessary validations
+  const isMobileValid = validateMobileNumber();
+  if (!isMobileValid) {
+      return false; // Prevent form submission if mobile number is invalid
+  }
+
+  // Add other validation logic as needed
+  return true; // Allow form submission if all validations pass
+}
+
+</script>
+
+{% endblock %} 

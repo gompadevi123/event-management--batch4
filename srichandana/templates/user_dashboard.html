@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #FFE4C4;
+            color: #333;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 42px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h2, p {
+            color: green;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: oblique;
+            font-weight: 400;
+            font-size: xx-large;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: #FFE4C4;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card p {
+            margin: 0 0 15px;
+            font-size: x-large;
+            line-height: 1.5;
+        }
+
+        .button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: auto;
+        }
+
+        .button:hover {
+            background-color: #04521c;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+        }
+
+        .logout-button:hover {
+            background-color: #5c0d15;
+        }
+
+        
+        @media (max-width: 768px) {
+            .card p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Welcome to Your Dashboard
+</header>
+
+<div class="dashboard-container">
+    <h2><strong>Navigate to Your Activities</strong></h2>
+    <p>Hi there! 👋 Welcome to your personalized dashboard. <br> Choose an activity below to get started and make the most of your day!</p>
+    
+    <div class="container">
+        <div class="card">
+            <p><strong>🎉 Event Details:</strong> Curious about what’s coming up? Click below to explore all the exciting events planned for you!</p>
+            <a href="{{ url_for('event_details') }}" class="button">Event Details</a>
+        </div>
+
+        <div class="card">
+            <p><strong>🎟️ Ticket Booking:</strong> Ready to grab your seat? Book tickets for your favorite events in just a few seconds.</p>
+            <a href="{{ url_for('ticket_booking') }}" class="button">Ticket Booking</a>
+        </div>
+
+        <div class="card">
+            <p><strong>🏛️ Halls:</strong> Need a venue? Check out all the available halls, their facilities, and upcoming schedules.</p>
+            <a href="{{ url_for('halls') }}" class="button">Halls</a>
+        </div>
+
+        <div class="card">
+            <p><strong>🔔 Notifications:</strong> Stay in the loop! Don’t miss out on important updates, alerts, and reminders. Check them out here.</p>
+            <a href="{{ url_for('notifications') }}" class="button">Notifications</a>
+        </div>
+
+        <div class="card">
+            <p><strong> Log Out:</strong> Done for the day? Make sure to log out securely. See you next time!</p>
+            <a href="{{ url_for('logout') }}" class="button logout-button">Log Out</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

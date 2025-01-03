@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="messages">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<h1>Event Details</h1>
+
+<form method="POST">
+    <label for="event_name">Please Enter the name of the Event :</label>
+    <input type="text" name="event_name" placeholder="Event Name" required />
+    <label for="organizer_name">Please enter your LoginID / Username :</label>
+    <input type="text" name="organizer_name" placeholder="Username(Organizer Name)" required />
+    <label for="address">Please enter Your Current address :</label>
+    <input type="text" name="address" placeholder="Address" required />
+    <label for="event_description">Please enter any specific details of the event : </label>
+    <textarea name="event_description" placeholder="Description"></textarea>
+    <label for="location">Please enter the Location at which you want the event to be held :</label>
+    <input type="text" name="location" placeholder="Location" required />
+    
+    <label for="start_time">Start Date:</label>
+    <input type="date" name="start_time" required />
+
+    <label for="end_time">End Date:</label>
+    <input type="date" name="end_time" required />
+    <label for="event_type">Please select the type of the event :</label>
+    <select name="event_type">
+      <option value="">Select Event Type</option>
+      <option value="Conference">Conference</option>
+      <option value="Workshop">Workshop</option>
+      <option value="Birth Day">Birth Day</option>
+      <option value="Wedding">Wedding</option>
+      <option value="Ceremony">Ceremony</option>
+      <option value="Party">Party</option>
+      
+    </select>
+
+    <center><button type="submit">Register Event</button></center>
+</form><br>
+
+
+
+<center><a href="{{ url_for('user_dashboard') }}" class="button">Back to Dashboard</a></center>
+
+
+<h2>Tailored Solutions for Every Event</h2>
+<p>No matter the size or type of event, our system is designed to meet your needs and exceed your expectations.</p>
+
+<style>
+
+  .alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  textarea {
+    width: 95%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-right: 10 px;
+  }
+
+  button {
+    background-color: #007BFF; 
+    color: white; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    padding: 10px 20px; 
+    text-align: center; 
+    width: auto; 
+    display: inline-block; 
+    transition: background-color 0.3s ease; 
+  }
+
+  button:hover {
+    background-color: #0056b3; 
+  }
+  label{
+    font-size: x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+</style>
+{% endblock %}

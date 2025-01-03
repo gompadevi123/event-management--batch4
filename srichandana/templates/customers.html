@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Customer Management</h1>
+<style>
+   button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 40%;
+      align-self: center;
+      align-items: center;
+      align-content: center;
+      margin-top: 12px;
+   }
+
+   div{
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+   }
+
+   button:hover {
+      background-color: #0056b3; 
+   }
+   
+</style>
+<form method="POST">
+   <div class="form-group">
+      <input type="text" name="name" placeholder="Name" required class="form-control">
+      <input type="email" name="email" placeholder="Email" required class="form-control">
+      <input type="text" name="phone" placeholder="Phone Number" class="form-control">
+      <input type="text" name="address" placeholder="Address" class="form-control">
+      <center><button type="submit" class='btn btn-primary'>Add Customer</button></center>
+   </div>
+</form>
+
+<div>
+   <h2>Existing Customers</h2>
+      {% if customers %}
+         <ul class='list-group'>
+             {% for customer in customers %}
+                 <li class='list-group-item'>{{ customer.name }} - {{ customer.email }} - {{ customer.phone }} - {{ customer.address }}</li>
+             {% endfor %}
+         </ul>
+      {% else %}
+         <p>No customers found.</p>
+      {% endif %}
+</div>
+
+<center><button><a href="{{ url_for('admin_dashboard') }}" class='btn btn-secondary'>Back to Dashboard</a></button><center>
+
+{% endblock %}
+  

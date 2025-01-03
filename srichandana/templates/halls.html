@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Hall Selection</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFE4C4;
+            color: #333;
+        }
+
+        header {
+            background-color: #68d3e6;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+        }
+
+        .halls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .hall {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hall img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .hall h2 {
+            background-color: #4dc8e0;
+            color: #fff;
+            margin: 0;
+            padding: 0.8rem 0;
+        }
+
+        .hall p {
+            padding: 0.5rem;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .form-buttons {
+            text-align: center;
+        }
+
+        .form-buttons button {
+            background-color: #4fc3e0;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .form-buttons button:hover {
+            background-color: #46d29c;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: middle; 
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle; 
+        }
+
+        .form-group div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center; 
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: #fff;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .halls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hall {
+                width: 90%;
+            }
+
+            form {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Select Your Event Hall and Provide Details</h1>
+</header>
+
+<div class="container">
+    <!-- Hall Selection -->
+    <div class="halls">
+        <div class="hall">
+            <img src="https://cdn.pixabay.com/photo/2016/02/01/18/27/wedding-table-1174141_640.jpg" alt="Hall 1">
+            <h2>Grand Ballroom</h2>
+            <p>Capacity: 500 people</p>
+            <p>Ideal for weddings and conferences</p>
+        </div>
+        <div class="hall">
+            <img src="https://plus.unsplash.com/premium_photo-1680807988328-7ba28ad24d9f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmlnJTIwY29ycG9yYXRlJTIwY29uZmVyZW5jZSUyMGhhbGx8ZW58MHx8MHx8fDA%3D" alt="Hall 2">
+            <h2>Modern Conference Room</h2>
+            <p>Capacity: 150 people</p>
+            <p>Perfect for corporate events</p>
+        </div>
+        <div class="hall">
+            <img src="https://plus.unsplash.com/premium_photo-1679547202918-bf37285d3caf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uZmVyZW5jZSUyMGhhbGx8ZW58MHx8MHx8fDA%3D" alt="Hall 3">
+            <h2>Artistic Studio</h2>
+            <p>Capacity: 50 people</p>
+            <p>Best for workshops and creative sessions</p>
+        </div>
+    </div>
+
+    
+    <form  method="POST" action="{{ url_for('halls') }}">
+        <div class="form-group">
+            <label for="hall">Select Hall:</label>
+            <select id="hall" name="hall" required>
+                <option value="">-- Select a Hall --</option>
+                <option value="grand_ballroom">Grand Ballroom</option>
+                <option value="conference_room">Modern Conference Room</option>
+                <option value="artistic_studio">Artistic Studio</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="attendees">Number of Attendees:</label>
+            <input type="number" id="attendees" name="attendees" min="1" max="500" required>
+        </div>
+
+        <div class="form-group">
+            <label>Food Requirements:</label>
+            <div>
+                <input type="radio" id="veg" name="food" value="vegetarian" required>
+                <label for="veg">Vegetarian</label>
+                <input type="radio" id="nonveg" name="food" value="non_vegetarian">
+                <label for="nonveg">Non-Vegetarian</label>
+                <input type="radio" id="both" name="food" value="both">
+                <label for="both">Both</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Technical Requirements:</label>
+            <div>
+                <input type="checkbox" id="projector" name="tech[]" value="projector">
+                <label for="projector">Projector</label>
+                <input type="checkbox" id="microphone" name="tech[]" value="microphone">
+                <label for="microphone">Microphone</label>
+                <input type="checkbox" id="speaker" name="tech[]" value="speaker_system">
+                <label for="speaker">Speaker System</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Setup Requirements:</label>
+            <div>
+                <input type="checkbox" id="stage" name="setup[]" value="stage">
+                <label for="stage">Stage</label>
+                <input type="checkbox" id="lighting" name="setup[]" value="lighting">
+                <label for="lighting">Lighting</label>
+                <input type="checkbox" id="decor" name="setup[]" value="decor">
+                <label for="decor">Decor</label>
+                <input type="checkbox" id="backdrop" name="setup[]" value="backdrop">
+                <label for="backdrop">Customized Backdrop</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Audio/Visual Requirements:</label>
+            <div>
+                <input type="checkbox" id="led_screen" name="av[]" value="led_screen">
+                <label for="led_screen">LED Screens</label>
+                <input type="checkbox" id="live_stream" name="av[]" value="live_stream">
+                <label for="live_stream">Live Streaming</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Parking Requirements:</label>
+            <div>
+                <input type="checkbox" id="valet_parking" name="parking" value="valet">
+                <label for="valet_parking">Valet Parking</label>
+            </div>
+        </div>
+        
+        
+        
+
+        <div class="form-group">
+            <label>Artistic Requirements:</label>
+            <textarea id="artistic" name="artistic" rows="4" placeholder="Describe any artistic requirements..."></textarea>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit">Submit Details</button><br>
+            <br>
+            <center><button type="button" onclick="window.history.back();">Back to DashBoard </button></center>
+        </div>
+
+    </form>
+</div>
+
+
+</body>
+</html>

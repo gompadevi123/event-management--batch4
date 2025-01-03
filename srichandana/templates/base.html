@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #de7dbd;
+            margin: 0;
+            padding: 20px;
+            background-color: rgb(202, 116, 219);
+            animation-name: example;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes example {
+            from {background-color: rgb(221, 40, 227);}
+            to {background-color: rgb(225, 179, 234);}
+        }       
+        h1{
+            color:rgb(199, 58, 238);
+            text-shadow: 2px 2px rgba(0, 0, 0, 0.189);
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 40 px;
+            border: black ;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: green;
+        }
+        h1 {
+            text-align: center;
+        }
+        input, select {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(100% - 33px); /* Adjust width for padding */
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            text-decoration: none;
+            color: white;
+            background-color: #18d85e;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
 
+        .button:hover {
+            background-color: #4ab39e;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+        <nav>
+            <a href="{{ url_for('home') }}" class="button"><b>HOME</b></a>
+            <a href="{{ url_for('about') }}" class="button"><b>ABOUT US</b></a>
+            <a href="{{ url_for('login') }}" class="button"><b>LOGIN</b></a>
+            <a href="{{ url_for('register') }}" class="button"><b>REGISTER</b></a>
+            <a href="{{ url_for('logout') }}" class="button"><b>LOGOUT</b></a>
+        </nav>
+    
+
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+
+            this.querySelectorAll('input, select').forEach(input => {
+                if (input.value === '') {
+                    valid = false;
+                    input.style.border = '2px solid red';
+                } else {
+                    input.style.border = '';
+                }
+            });
+
+            if (!valid) {
+                e.preventDefault(); // Prevent form submission
+                alert('Please fill out all fields.');
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

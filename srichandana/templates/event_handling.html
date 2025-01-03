@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<h2>Registered Events:</h2>
+<style>
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+            width: 80%;
+            align-self: center;
+            align-items: center;
+            align-content: center;
+            
+            
+        }
+
+        button:hover {
+            background-color: #0056b3; 
+        }
+</style>
+{% if events %}
+    <table border="1" style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <thead>
+            <tr>
+                
+                <th>Event Name</th>
+                <th>Organizer Name</th>
+                <th>Address</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Event Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.organizer_name }}</td>
+                <td>{{ event.address }}</td>
+                <td>{{ event.event_description }}</td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.start_time }}</td> 
+                <td>{{ event.end_time }}</td> 
+                <td>{{ event.event_type }}</td> 
+                <td>{{ event.status }}</td> 
+                
+                <td>
+                    
+                    <form action="{{ url_for('send_notification', event_name=event.event_name) }}" method="POST">
+                        <input type="text" name="username" placeholder="Recipient's Username" required>
+                        
+                        <center><button type="submit">Send Notification</button></center>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No events registered yet. Please add new events.</p>
+{% endif %}
+
+<p><a href="{{ url_for('event_details') }}" style="padding: 10px; background-color: #5cb85c; color: white; text-decoration: none; display: inline-block;">Add New Event</a></p> 
+<p><a href="{{ url_for('admin_dashboard') }}" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none;display: inline-block;">Back to Dashboard</a></p>
+<p><a href="{{ url_for('controlroom') }}" style="padding: 10px; background-color: #007bff; color: white; text-decoration: none;display: inline-block;">Go to Control Room</a></p>
+
+{% endblock %}

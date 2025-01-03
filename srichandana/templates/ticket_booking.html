@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="messages">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<h1>Ticket Booking</h1>
+
+
+<form method="POST">
+  <div class="form-group">
+    <label for="ticket_name">Ticket Name:</label>
+    <input type="text" id="ticket_name" name="ticket_name" placeholder="Ticket Name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" placeholder="Quantity" required min="1">
+  </div>
+
+  <div class="form-group">
+    <label for="event_type">Event Type:</label>
+    <input type="text" id="event_type" name="event_type" placeholder="Event Type" required>
+  </div>
+
+  <!-- <div class="form-group">
+    <label for="cash_payment">Cash Payment:</label>
+    <select id="cash_payment" name="cash_payment" required>
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+  </div> -->
+
+  <!-- Additional fields - hidden by default -->
+  <!-- <div id="additionalFields" style="display: none;"> -->
+    <div class="form-group">
+      <label for="customer_name">Customer Name:</label>
+      <input type="text" id="customer_name" name="customer_name" placeholder="Customer Name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="ticket_class">Class of Ticket:</label>
+      <select id="ticket_class" name="ticket_class" required>
+        <option value="">Select Class</option>
+        <option value="1">Class 1</option>
+        <option value="2">Class 2</option>
+        <option value="3">Class 3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="bank_name">Bank Name:</label>
+      <select id="bank_name" name="bank_name" required>
+        <option value="">Select Bank</option>
+        <option value="sbi">SBI</option>
+        <option value="icici">ICICI</option>
+        <option value="canara">Canara Bank</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="card_type">Card Type:</label>
+      <select id="card_type" name="card_type" required>
+        <option value="">Select Card Type</option>
+        <option value="credit">Credit Card</option>
+        <option value="debit">Debit Card</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cvv_number">CVV Number:</label>
+      <input type="text" id="cvv_number" name="cvv_number" placeholder="CVV Number" required pattern="\d{3}" title="Enter a valid CVV number (3 digits)">
+    </div>
+  
+  <div class="form-group">
+    <center><button type="submit">Book Ticket</button></center>
+    <center><button type="button" onclick="window.history.back();">Back to DashBoard </button></center>
+  </div>
+</form>
+
+
+<style>
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+    display: inline;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+  /* .button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+    display: inline;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  } */
+
+  .alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
+
+<!-- <script>
+  const cashPayment = document.getElementById('cash_payment');
+  const additionalFields = document.getElementById('additionalFields');
+
+  cashPayment.addEventListener('change', function () {
+    if (cashPayment.value === 'no') {
+      additionalFields.style.display = 'block';
+    } else {
+      additionalFields.style.display = 'none';
+      additionalFields.ariaRequired = 'false';
+    }
+  });
+</script> -->
+
+{% endblock %} 

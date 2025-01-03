@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFE4C4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 42px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h2, p {
+            color: green;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: oblique;
+            font-weight: 400;
+            font-size: xx-large;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: #FFE4C4;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card p {
+            margin: 0 0 15px;
+            font-size: x-large;
+            line-height: 1.5;
+        }
+
+        .button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: auto;
+        }
+
+        .button:hover {
+            background-color: #04521c;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+        }
+
+        .logout-button:hover {
+            background-color: #5c0d15;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Welcome to Admin Dashboard
+    </header>
+
+    <div class="dashboard-container">
+        <h2><strong>Navigate to Your Activities</strong></h2>
+        <p>Welcome to the dashboard! <br> Here you can easily manage your activities and navigate to different sections of the platform. Choose the area you're interested in below:</p>
+
+        <div class="container">
+            <div class="card">
+                <p><strong>Event Handling:</strong> Manage and view your upcoming events in one place.</p>
+                <a href="{{ url_for('event_handling') }}" class="button">Event Handling</a>
+            </div>
+
+            <div class="card">
+                <p><strong>Control Room:</strong> Access the control room to monitor and manage system operations in real-time.</p>
+                <a href="{{ url_for('controlroom') }}" class="button">Control Room</a>
+            </div>
+
+            <div class="card">
+                <p><strong>Customers:</strong> Check and manage customer details easily.</p>
+                <a href="{{ url_for('customers') }}" class="button">Customers</a>
+            </div>
+
+            <div class="card">
+                <p><strong>Log Out:</strong> Done for the day? Click here to securely exit your account.</p>
+                <a href="{{ url_for('logout') }}" class="button logout-button">Log Out</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Notifications</h1>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<style>
+    button{
+        background-color: #007BFF;
+        color: white; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        font-size: 14px; 
+        padding: 10px 20px; 
+        text-align: center; 
+        width: auto;
+        display: inline-block; 
+        transition: background-color 0.3s ease; 
+    }
+</style>
+
+{% if notifications %}
+    <table>
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Event Name</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notification in notifications %}
+            
+            <tr>
+                <td>{{ notification.message }}</td>
+                <td>{{ notification.event_name }}</td>
+                <td>{{ notification.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% else %}
+    <p>No notifications to display.</p>
+{% endif %}
+<br><br>
+<center><button type="button" onclick="window.history.back();">Back to DashBoard </button></center>
+{% endblock %}

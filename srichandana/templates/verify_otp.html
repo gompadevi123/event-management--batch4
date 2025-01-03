@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 15px 0 0;
+        }
+
+        li {
+            background-color: #ffefef;
+            color: #d9534f;
+            padding: 12px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            border: 1px solid #d9534f;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+            input[type="text"] {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verify OTP</h1>
+        <form action="{{ url_for('verify_otp') }}" method="POST">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" name="otp" id="otp" required placeholder="Enter your OTP">
+            <button type="submit">Verify OTP</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <ul>
+              {% for message in messages %}
+                  <li>{{ message }}</li>
+              {% endfor %}
+              </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
