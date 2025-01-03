@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets for {{ event['name'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bticket.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Tickets for {{ event['name'] }}</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('confirm_booking') }}" method="POST">
+            <input type="hidden" name="event_id" value="{{ event['event_id'] }}">
+            <p><strong>Location:</strong> {{ event['location'] }}</p>
+            <p><strong>Start Time:</strong> {{ event['start_time'] }}</p>
+            <p><strong>End Time:</strong> {{ event['end_time'] }}</p>
+            <p><strong>Available Tickets:</strong> {{ event['available_tickets'] }}</p>
+            <p><strong>Price per Ticket:</strong> ${{ event['ticket_price'] }}</p>
+            <label for="num_tickets">Number of Tickets:</label>
+            <input type="number" name="num_tickets" min="1" max="{{ event['available_tickets'] }}" required>
+            <button type="submit">Confirm Booking</button>
+        </form>
+    </div>
+</body>
+</html>

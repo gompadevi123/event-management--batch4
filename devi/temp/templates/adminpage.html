@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+    <!-- Linking to the CSS file in the static folder -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylead.css') }}">
+    
+    <!-- Linking to the external JavaScript file -->
+    <script src="{{ url_for('static', filename='js/admin.js') }}" defer></script>
+</head>
+<body>
+    <h1>Welcome Admin</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>  <!-- Link to the home page -->
+            <li><a href="{{ url_for('view_registrations') }}">View Registrations</a></li>
+            <li><a href="{{ url_for('view_hall_bookings') }}">View Hall Bookings</a></li>
+            <li><a href="{{ url_for('view_ticket_bookings') }}">View Ticket Bookings</a></li>
+            <li><a href="{{ url_for('create_event') }}">Create Event</a></li> <!-- Link to create event page -->
+            <!-- Removed the link to the Create Event form -->
+        </ul>
+    </nav>
+
+</body>
+</html>
